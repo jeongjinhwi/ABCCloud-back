@@ -54,6 +54,13 @@ jobs:
           push: true
           tags: |
             ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.ACR_REPOSITORY }}:${{ github.event.inputs.image_tag }}
+            
+      - name: Checkout deployment repository 
+        uses: actions/checkout@v4
+        with:
+          repository: jeongjinhwi/ABCCloud-deploy
+          token: ${{ secrets.DEPLOYMENT_REPO_PAT }} 
+          path: 'ABCCloud-deploy' 
       
       - name: Install Kustomize 
         run: |
@@ -62,7 +69,8 @@ jobs:
 
       - name: Update Kubernetes manifest
         run: |
-          cd shopping-mall/ABCCloud-deploy-main/k8s/shopping-mall/backend/overlays/aws
+          pwd
+          cd ABCCloud-deploy/k8s/shopping-mall/backend/overlays/aws
           kustomize edit set image backend-image=${{ secrets.ECR_BACKEND_REPOSITORY }}:${{ github.event.inputs.image_tag }}
 
       - name: Commit and push changes

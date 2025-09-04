@@ -21,7 +21,7 @@ products = [
         "id": 1,
         "name": "Smartphone",
         "description": "Latest model smartphone with amazing features",
-        "price": 999.99,
+        "price": 9999.99,
         "image_url": "https://shop-image-sample-bucket.s3.ap-northeast-2.amazonaws.com/products/IT/smartphone.png"
     },
     {
